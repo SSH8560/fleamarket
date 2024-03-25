@@ -1,4 +1,4 @@
-package com.ssh8560.fleamarket;
+package com.ssh8560.fleamarket.user;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

@@ -1,6 +1,6 @@
 package com.ssh8560.fleamarket.image;
 
-import com.ssh8560.fleamarket.JpaImageRepository;
+import com.ssh8560.fleamarket.repository.JpaImageRepository;
 import com.ssh8560.fleamarket.client.CloudImageClient;
 import com.ssh8560.fleamarket.config.Constants;
 import com.ssh8560.fleamarket.entity.Image;

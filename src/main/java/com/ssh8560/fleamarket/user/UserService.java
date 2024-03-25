@@ -1,6 +1,9 @@
-package com.ssh8560.fleamarket;
+package com.ssh8560.fleamarket.user;
 
+import com.ssh8560.fleamarket.entity.User;
 import com.ssh8560.fleamarket.entity.UserInfo;
+import com.ssh8560.fleamarket.repository.JpaUserInfoRepository;
+import com.ssh8560.fleamarket.repository.JpaUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

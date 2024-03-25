@@ -13,7 +13,7 @@ import java.util.function.Consumer;
 public class KakaoAddressClient {
     private final WebClient webClient;
 
-    public void requestAddress(Double x, Double y, Consumer<AddressResponse> addressResponseConsumer) {
+    public AddressResponse requestAddress(Double x, Double y) {
         Mono<AddressResponse> mono = webClient.get()
             .uri(uriBuilder -> uriBuilder
                 .path("/local/geo/coord2address.json")
@@ -24,8 +24,6 @@ public class KakaoAddressClient {
             .retrieve()
             .bodyToMono(AddressResponse.class);
 
-        mono.subscribe(addressResponseConsumer, throwable -> {
-            System.out.println("throwable = " + throwable);
-        });
+        return mono.block();
     }
 }

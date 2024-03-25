@@ -59,15 +59,4 @@ public class ItemController {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(uploadedImageCount);
     }
-
-    @GetMapping("/{itemId}/location")
-    public ResponseEntity<ItemImageResponse> getItemLocation(
-        @PathVariable(name = "itemId") Long itemId
-    ) {
-        client.requestAddress(127.0654361, 37.7376686, addressResponse -> {
-            System.out.println("addressResponse = " + addressResponse);
-        });
-
-        return ResponseEntity.ok(null);
-    }
 }

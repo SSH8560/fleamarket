@@ -1,4 +1,4 @@
-package com.ssh8560.fleamarket;
+package com.ssh8560.fleamarket.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

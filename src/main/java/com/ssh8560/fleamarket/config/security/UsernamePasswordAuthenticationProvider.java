@@ -1,7 +1,7 @@
 package com.ssh8560.fleamarket.config.security;
 
-import com.ssh8560.fleamarket.JpaUserRepository;
-import com.ssh8560.fleamarket.User;
+import com.ssh8560.fleamarket.repository.JpaUserRepository;
+import com.ssh8560.fleamarket.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -15,7 +15,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Component
 @RequiredArgsConstructor

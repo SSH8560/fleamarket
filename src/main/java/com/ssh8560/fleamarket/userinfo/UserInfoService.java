@@ -1,14 +1,10 @@
 package com.ssh8560.fleamarket.userinfo;
 
-import com.ssh8560.fleamarket.JpaUserInfoRepository;
-import com.ssh8560.fleamarket.User;
-import com.ssh8560.fleamarket.entity.UserInfo;
+import com.ssh8560.fleamarket.repository.JpaUserInfoRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.UUID;
 
 @Service
 @Transactional
