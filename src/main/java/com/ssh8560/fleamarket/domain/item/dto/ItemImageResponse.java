@@ -1,4 +1,4 @@
-package com.ssh8560.fleamarket.item.dto;
+package com.ssh8560.fleamarket.domain.item.dto;
 
 import lombok.Data;
 

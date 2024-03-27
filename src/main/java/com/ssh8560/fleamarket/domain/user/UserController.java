@@ -1,4 +1,4 @@
-package com.ssh8560.fleamarket.user;
+package com.ssh8560.fleamarket.domain.user;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,6 +19,7 @@ public class UserController {
         @RequestBody UserPostRequest request
     ) {
         service.saveUser(request);
+
         return ResponseEntity.status(HttpStatus.CREATED).body(null);
     }
 }

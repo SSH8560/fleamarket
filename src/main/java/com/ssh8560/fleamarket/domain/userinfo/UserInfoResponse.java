@@ -1,4 +1,4 @@
-package com.ssh8560.fleamarket.userinfo;
+package com.ssh8560.fleamarket.domain.userinfo;
 
 import com.ssh8560.fleamarket.entity.UserInfo;
 import lombok.Data;

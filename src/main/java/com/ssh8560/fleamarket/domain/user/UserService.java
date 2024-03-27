@@ -1,4 +1,4 @@
-package com.ssh8560.fleamarket.user;
+package com.ssh8560.fleamarket.domain.user;
 
 import com.ssh8560.fleamarket.entity.User;
 import com.ssh8560.fleamarket.entity.UserInfo;

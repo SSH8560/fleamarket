@@ -2,6 +2,7 @@ package com.ssh8560.fleamarket.config.security;
 
 import com.ssh8560.fleamarket.config.Constants;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.FilterChain;
@@ -28,17 +29,16 @@ public class JWTTokenValidatorFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        String header = request.getHeader(Constants.JWT_HEADER);
-        String[] split = header.split(" ");
+        String jwtHeader = request.getHeader(Constants.JWT_HEADER);
 
-        if (!split[0].equals("Bearer")) {
+        if (jwtHeader == null || !jwtHeader.startsWith("Bearer ")) {
             filterChain.doFilter(request, response);
             return;
         }
 
 
-        String jwt = split[1];
-        if (jwt != null) {
+        String jwt = jwtHeader.substring(7);
+        try{
             SecretKey key = Keys.hmacShaKeyFor(jwtKey.getBytes(StandardCharsets.UTF_8));
             Claims claims = (Claims) Jwts.parser()
                 .verifyWith(key)
@@ -48,10 +48,16 @@ public class JWTTokenValidatorFilter extends OncePerRequestFilter {
 
             String id = String.valueOf(claims.get("id"));
             String authorities = (String) claims.get("authorities");
+
             Authentication authentication = new UsernamePasswordAuthenticationToken(id, null, AuthorityUtils.commaSeparatedStringToAuthorityList(authorities));
             SecurityContextHolder.getContext().setAuthentication(authentication);
+        } catch (JwtException e){
+            e.printStackTrace();
+        } finally {
+            filterChain.doFilter(request,response);
         }
-        filterChain.doFilter(request, response);
+
+
     }
 
     @Override

@@ -1,10 +1,10 @@
-package com.ssh8560.fleamarket.image;
+package com.ssh8560.fleamarket.domain.image;
 
 import com.ssh8560.fleamarket.repository.JpaImageRepository;
 import com.ssh8560.fleamarket.client.CloudImageClient;
 import com.ssh8560.fleamarket.config.Constants;
 import com.ssh8560.fleamarket.entity.Image;
-import com.ssh8560.fleamarket.item.dto.ItemImageResponse;
+import com.ssh8560.fleamarket.domain.item.dto.ItemImageResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,13 +22,13 @@ public class ImageService {
     public int saveImages(Long itemId, List<MultipartFile> images) {
         for (MultipartFile image : images) {
             String key = cloudImageClient.uploadImage(image);
-            imageRepository.save(new Image(key, itemId));
+            imageRepository.save(new Image(itemId, key));
         }
 
         return images.size();
     }
 
-    public ItemImageResponse getImagesUrl(Long itemId){
+    public ItemImageResponse getImagesUrl(Long itemId) {
         List<String> list = imageRepository.findByItemId(itemId).stream()
             .map(image -> Constants.CLOUD_IMAGE_URL + image.getId())
             .toList();

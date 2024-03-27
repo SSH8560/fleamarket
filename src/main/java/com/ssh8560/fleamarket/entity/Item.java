@@ -17,8 +17,6 @@ public class Item extends BaseEntity {
 
     private String title;
 
-    private String category;
-
     private String content;
 
     private Integer price;
@@ -34,10 +32,9 @@ public class Item extends BaseEntity {
     @OneToOne(mappedBy = "item")
     private Location location;
 
-    public Item(UserInfo userInfo, String title, String category, String content, Integer price) {
+    public Item(UserInfo userInfo, String title, String content, Integer price) {
         this.userInfo = userInfo;
         this.title = title;
-        this.category = category;
         this.content = content;
         this.price = price;
     }

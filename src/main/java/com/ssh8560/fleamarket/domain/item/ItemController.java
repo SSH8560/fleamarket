@@ -1,10 +1,10 @@
-package com.ssh8560.fleamarket.item;
+package com.ssh8560.fleamarket.domain.item;
 
-import com.ssh8560.fleamarket.client.KakaoAddressClient;
-import com.ssh8560.fleamarket.image.ImageService;
-import com.ssh8560.fleamarket.item.dto.ItemImageResponse;
-import com.ssh8560.fleamarket.item.dto.ItemPostRequest;
-import com.ssh8560.fleamarket.item.dto.ItemResponse;
+import com.ssh8560.fleamarket.domain.image.ImageService;
+import com.ssh8560.fleamarket.domain.item.dto.ItemPostRequest;
+import com.ssh8560.fleamarket.domain.item.dto.ItemImageResponse;
+import com.ssh8560.fleamarket.domain.item.dto.ItemResponse;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,15 +21,15 @@ import java.util.List;
 public class ItemController {
     private final ItemService itemService;
     private final ImageService imageService;
-    private final KakaoAddressClient client;
 
-    @GetMapping("/{itemId}")
-    public ResponseEntity<ItemResponse> getItem(
-        @PathVariable(name = "itemId") Long itemId
+    @GetMapping
+    public ResponseEntity<List<ItemResponse>> getItems(
+        @RequestParam(name = "gu") String gu,
+        @RequestParam(name = "dong") String dong
     ) {
-        ItemResponse item = itemService.getItem(itemId);
+        List<ItemResponse> items = itemService.getByParams(gu,dong);
 
-        return ResponseEntity.ok(item);
+        return ResponseEntity.ok(items);
     }
 
     @PostMapping
@@ -38,7 +38,16 @@ public class ItemController {
         @RequestBody ItemPostRequest request) {
         Long savedId = itemService.saveItem(authentication.getName(), request);
 
-        return ResponseEntity.created(URI.create("/items/" + savedId)).build();
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedId.toString());
+    }
+
+    @GetMapping("/{itemId}")
+    public ResponseEntity<ItemResponse> getItem(
+        @PathVariable(name = "itemId") Long itemId
+    ) {
+        ItemResponse item = itemService.getItem(itemId);
+
+        return ResponseEntity.ok(item);
     }
 
     @GetMapping("/{itemId}/images")

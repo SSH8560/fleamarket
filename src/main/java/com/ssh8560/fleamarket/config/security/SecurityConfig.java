@@ -28,7 +28,9 @@ public class SecurityConfig {
         http.addFilterAfter(new JWTTokenGeneratorFilter(jwtKey), BasicAuthenticationFilter.class);
 
         http.authorizeHttpRequests(request -> request
-            .requestMatchers(HttpMethod.POST,"/user").permitAll()
+            .requestMatchers(HttpMethod.POST, "/users").permitAll()
+            .requestMatchers(HttpMethod.GET, "/items/**").permitAll()
+            .requestMatchers("/location/**").permitAll()
             .anyRequest().authenticated());
 
         http.httpBasic(Customizer.withDefaults());
